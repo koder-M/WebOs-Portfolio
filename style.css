@@ -196,6 +196,9 @@ main .topbar {
   padding: 0.5rem 1rem;
   background-color: rgba(255, 255, 255, 0.388);
   backdrop-filter: blur(15px);
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 main .topbar .left {
   display: flex;

@@ -77,6 +77,7 @@ function openWindow(winId) {
 let finder = document.querySelector(".finder");
 let nots = document.querySelector(".nots");
 let brwsr = document.querySelector(".brwsr");
+let photos = document.querySelector('.photos')
 
 finder.addEventListener("click", function(){
     openWindow("finderWin");
@@ -86,6 +87,10 @@ brwsr.addEventListener("click", function(){
 })
 nots.addEventListener("click", function(){
     openWindow("notesWin");
+})
+
+photos.addEventListener('click', function(){
+    openWindow("photosWin");
 })
 
 // Close window
@@ -110,6 +115,11 @@ browserbtn.addEventListener("click", function(){
     closeWindow("browserWin");
 })
 
+let photosbtn = document.querySelector('#photosWin1');
+photosbtn.addEventListener('click', () => {
+    closeWindow('photosWin');
+})
+
 
 let mini =  document.querySelector('.minimize');
 mini.addEventListener("click", function(){
@@ -124,6 +134,11 @@ notesmini.addEventListener("click", function(){
 let brwsmini = document.querySelector("#browserWin2");
 brwsmini.addEventListener("click", function(){
     minWindow("browserWin");
+})
+
+let photosmini = document.querySelector('#photosWin2');
+photosmini.addEventListener('click', () => {
+    minWindow('photosWin')
 })
 // Minimize
 function minWindow(winId) {
@@ -164,6 +179,11 @@ notesMax.addEventListener("click", function() {
 let browserMax = document.querySelector("#browserWin3");
 browserMax.addEventListener("click", function() {
     maxWindow("browserWin");
+})
+
+let photosMax = document.querySelector('#photosWin3');
+photosMax.addEventListener('click', () => {
+    maxWindow('photosWin')
 })
 
 
