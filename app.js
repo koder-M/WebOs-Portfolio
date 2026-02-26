@@ -1,5 +1,3 @@
-
-
 let folderMenu = document.getElementById("folderMenu");
 let selectedFolder = null;
 let folders = [];
@@ -452,5 +450,262 @@ function renderFolder(folder) {
 }
 
 
+
+let terminalIcon = document.querySelector(".terminal");
+let terminalInput = document.getElementById("terminalInput");
+let terminalOutput = document.getElementById("terminalOutput");
+
+terminalIcon.addEventListener("click", function(){
+    openWindow("terminalWin");
+    setTimeout(() => {
+        terminalInput.focus();
+    }, 50);
+});
+
+// Close
+document.getElementById("terminalWin1").addEventListener("click", function(){
+    closeWindow("terminalWin");
+});
+
+// Minimize
+document.getElementById("terminalWin2").addEventListener("click", function(){
+    minWindow("terminalWin");
+});
+
+// Maximize
+document.getElementById("terminalWin3").addEventListener("click", function(){
+    maxWindow("terminalWin");
+});
+
+// Commands
+let commands = {
+    about: "Hi, I'm Chetan Kumawat. I build interactive MacOS-style web experiences.",
+    name: "Chetan Kumawat",
+    skills: "HTML, CSS, JavaScript, UI Engineering",
+    help: "Commands: about, name, skills, open finder, open notes, open browser, open photos, clear"
+};
+
+function createNewInputLine(){
+    let inputLine = document.createElement("div");
+    inputLine.className = "terminal-input-line";
+    inputLine.innerHTML = `
+        <span class="prompt">chetan@mac ~ %</span>
+        <input type="text" class="terminalInput" />
+    `;
+    terminalOutput.appendChild(inputLine);
+
+    let newInput = inputLine.querySelector("input");
+    newInput.focus();
+    attachTerminalEvent(newInput);
+}
+
+function attachTerminalEvent(inputElement){
+    inputElement.addEventListener("keydown", function(e){
+
+        if(e.key === "Enter"){
+
+            let input = this.value.trim().toLowerCase();
+            if(input === "") return;
+
+            let line = document.createElement("div");
+            line.textContent = "chetan@mac ~ % " + input;
+            terminalOutput.appendChild(line);
+
+            this.parentElement.remove();
+
+
+            if(input === "clear"){
+                terminalOutput.innerHTML = "";
+                createNewInputLine();
+                return;
+            }
+
+            if(commands[input]){
+                let output = document.createElement("div");
+                output.textContent = commands[input];
+                terminalOutput.appendChild(output);
+            }
+
+            else if(input.startsWith("open ")){
+                let app = input.split(" ")[1];
+
+                if(app === "finder") openWindow("finderWin");
+                else if(app === "notes") openWindow("notesWin");
+                else if(app === "browser") openWindow("browserWin");
+                else if(app === "photos") openWindow("photosWin");
+                else {
+                    let err = document.createElement("div");
+                    err.textContent = "App not found.";
+                    terminalOutput.appendChild(err);
+                }
+            }
+
+            else{
+                let err = document.createElement("div");
+                err.textContent = "Command not found. Type 'help'";
+                terminalOutput.appendChild(err);
+            }
+
+            // 🔹 Scroll bottom
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
+
+            // 🔹 New prompt create
+            createNewInputLine();
+        }
+    });
+}
+
+attachTerminalEvent(terminalInput);
+
+
+
+
+let cameraIcon = document.querySelector(".camera");
+let video = document.getElementById("cameraVideo");
+let canvas = document.getElementById("cameraCanvas");
+let captureBtn = document.getElementById("captureBtn");
+
+let cameraStream = null;
+
+// OPEN CAMERA
+cameraIcon.addEventListener("click", async function(){
+    openWindow("cameraWin");
+
+    if(cameraStream) return;
+
+    try{
+        cameraStream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = cameraStream;
+    } catch(err){
+        alert("Camera permission denied!");
+    }
+});
+
+// CAPTURE IMAGE
+captureBtn.addEventListener("click", function(){
+
+    console.log('kkkk');
+
+    if(!cameraStream) return;
+
+    let scale = 0.5;
+canvas.width = video.videoWidth * scale;
+canvas.height = video.videoHeight * scale;
+
+let ctx = canvas.getContext("2d");
+ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+let imageData = canvas.toDataURL("image/jpeg", 0.6);
+
+    savePhoto(imageData);
+
+    // small flash effect
+    cameraFlashEffect();
+});
+
+// SAVE IMAGE
+function savePhoto(img){
+    let photos = JSON.parse(localStorage.getItem("myPhotos")) || [];
+    photos.push(img);
+    localStorage.setItem("myPhotos", JSON.stringify(photos));
+}
+
+
+
+// CLOSE CAMERA
+document.getElementById("cameraWin1").addEventListener("click", function(){
+    closeWindow("cameraWin");
+
+    if(cameraStream){
+        cameraStream.getTracks().forEach(track => track.stop());
+        cameraStream = null; 
+    }
+});
+
+// FLASH EFFECT
+function cameraFlashEffect(){
+    let flash = document.createElement("div");
+    flash.style.position = "absolute";
+    flash.style.top = 0;
+    flash.style.left = 0;
+    flash.style.width = "100%";
+    flash.style.height = "100%";
+    flash.style.background = "white";
+    flash.style.opacity = "0.8";
+    flash.style.pointerEvents = "none";
+
+    document.getElementById("cameraWin").appendChild(flash);
+
+    setTimeout(() => {
+        flash.remove();
+    }, 120);
+}
+
+const photoGrid = document.getElementById("photoGrid");
+const viewerView = document.getElementById("viewerView");
+const viewerImage = document.getElementById("viewerImage");
+const backBtn = document.getElementById("backBtn");
+const galleryView = document.querySelector(".gallery-view");
+
+let currentIndex = 0;
+
+function renderPhotos() {
+    let photos = JSON.parse(localStorage.getItem("myPhotos")) || [];
+
+    photoGrid.innerHTML = "";
+
+    photos.forEach((src, index) => {
+        const img = document.createElement("img");
+        img.src = src;
+        img.onclick = () => openViewer(index);
+        photoGrid.appendChild(img);
+    });
+}
+function openViewer(index) {
+    let photos = JSON.parse(localStorage.getItem("myPhotos")) || [];
+
+    currentIndex = index;
+    viewerImage.src = photos[index];
+
+    viewerView.classList.add("active");
+    galleryView.classList.add("slide-left");
+}
+
+backBtn.onclick = () => {
+    viewerView.classList.remove("active");
+    galleryView.classList.remove("slide-left");
+};
+
+photos.addEventListener("click", function(){
+    openWindow("photosWin");
+    renderPhotos();   // IMPORTANT
+});
+
+
+const inner = document.querySelector('.inner');
+const overlay = document.querySelector('.overlay');
+let w = 0;
+let rotation = 0;
+
+
+let file = null;
+let image = null;
+
+let interval = setInterval(() => {
+    if (w < 90) { 
+        w += 1; 
+        inner.style.width = w + '%';
+    } else {
+        clearInterval(interval); 
+    }
+}, 40); 
+
+setTimeout(() => {
+    inner.style.transition = 'width 0.5s ease-in-out';
+    inner.style.width = '100%';
+    setTimeout(() => {
+        overlay.style.display = 'none';
+    }, 500);
+}, 4000);
 
 

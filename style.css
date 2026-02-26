@@ -96,6 +96,142 @@ main .window .content textarea {
   border: none;
   outline: none;
 }
+main #terminalWin {
+  width: 600px;
+  height: 350px;
+}
+main #terminalWin .terminal-content {
+  background: #000;
+  color: #00ff88;
+  height: 100%;
+  padding: 15px;
+  font-family: monospace;
+  font-size: 0.9rem;
+}
+main #terminalWin .terminal-content #terminalOutput {
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+main #terminalWin .terminal-content .terminal-input-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+main #terminalWin .terminal-content .terminal-input-line .prompt {
+  color: #00ff88;
+}
+main #terminalWin .terminal-content .terminal-input-line input {
+  background: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  color: #00ff88;
+  font-family: monospace;
+  font-size: 0.9rem;
+  flex: 1;
+}
+main #terminalWin .terminal-content .terminal-input-line input:focus {
+  outline: none;
+  box-shadow: none;
+}
+main #cameraWin {
+  width: 500px;
+  height: 400px;
+  z-index: 9999;
+}
+main #cameraWin .camera-only {
+  position: relative;
+  height: calc(100% - 35px);
+  background: #000;
+}
+main #cameraWin .camera-only video {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  pointer-events: none;
+}
+main #cameraWin .camera-only #captureBtn {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 30px;
+  border-radius: 30px;
+  border: none;
+  background: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+main #photosWin .photos-app {
+  position: relative;
+  overflow-y: auto;
+  height: calc(100% - 35px);
+  overflow-x: hidden;
+}
+main #photosWin .photos-app .gallery-view,
+main #photosWin .photos-app .viewer-view {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s ease;
+}
+main #photosWin .photos-app .gallery-view .photo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+main #photosWin .photos-app .gallery-view .photo-grid img {
+  width: 120px;
+  aspect-ratio: 1/1;
+  -o-object-fit: cover;
+     object-fit: cover;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+  background-color: #F4F4DB;
+  padding: 0.5rem 0.5rem;
+}
+main #photosWin .photos-app .gallery-view .photo-grid img:hover {
+  transform: scale(1.05);
+}
+main #photosWin .photos-app .gallery-view.slide-left {
+  transform: translateX(-110%);
+}
+main #photosWin .photos-app .viewer-view {
+  background-color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateX(100%);
+  transition: transform 0.4s ease;
+}
+main #photosWin .photos-app .viewer-view img {
+  max-width: 100%;
+  max-height: 100%;
+}
+main #photosWin .photos-app .viewer-view.active {
+  transform: translateX(0%);
+}
+main #photosWin .photos-app .viewer-view #backBtn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: white;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 500;
+}
+main #photosWin .photos-app .viewer-view #backBtn:hover {
+  background: #f0f0f0;
+}
 main .folder {
   position: absolute;
   width: 80px;
@@ -267,4 +403,49 @@ main .port h1 span {
 }
 main .port h1 span:hover {
   transform: scale(1.2);
+}
+
+.overlay {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(135deg, #1a1a1a, #333);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100000000;
+}
+.overlay .loader {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.overlay .loader .logo-1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.overlay .loader .logo-1 i {
+  font-size: 3rem;
+  color: white;
+}
+.overlay .loader .outer {
+  height: 0.3rem;
+  width: 20%;
+  border-radius: 50px;
+  margin-top: 2rem;
+  overflow: hidden;
+}
+.overlay .loader .outer .inner {
+  height: 100%;
+  width: 0%;
+  background-color: white;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  font-size: 1.5rem;
+  transition: width 0.2s ease;
 }/*# sourceMappingURL=style.css.map */

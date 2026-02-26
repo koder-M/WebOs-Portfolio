@@ -54,14 +54,65 @@
 </iframe>
             </div>
         </div>
-        <div class="window" id="photosWin" data-tittle = "Photos">
+        <div class="window" id="photosWin" data-title="Photos">
+    
             <div class="tittle-bar">
                 <div class="buttons">
                     <span id="photosWin1" class="btn close"></span>
-                    <span id="photosWin2" class="btn minimize" ></span>
+                    <span id="photosWin2" class="btn minimize"></span>
                     <span id="photosWin3" class="btn maximize"></span>
                 </div>
                 <p>Photos</p>
+            </div>
+        
+            <div class="content photos-app">
+        
+                <!-- GALLERY VIEW -->
+                <div class="gallery-view">
+                    <div class="photo-grid" id="photoGrid"></div>
+                </div>
+        
+                <!-- VIEWER MODE -->
+                <div class="viewer-view" id="viewerView">
+                    <button id="backBtn">← Back</button>
+                    <img id="viewerImage">
+                </div>
+        
+            </div>
+        
+        </div>
+        <div class="window" id="terminalWin" data-title="Terminal">
+            <div class="tittle-bar">
+                <div class="buttons">
+                    <span id="terminalWin1" class="btn close"></span>
+                    <span id="terminalWin2" class="btn minimize"></span>
+                    <span id="terminalWin3" class="btn maximize"></span>
+                </div>
+                <p>Terminal</p>
+            </div>
+            <div class="terminal-content">
+                <div id="terminalOutput">
+                    <div class="terminal-input-line">
+                        <span class="prompt">chetan@mac ~ %</span>
+                        <input type="text" id="terminalInput" autofocus />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="window" id="cameraWin" data-title="Camera">
+            <div class="tittle-bar">
+                <div class="buttons">
+                    <span id="cameraWin1" class="btn close"></span>
+                    <span id="cameraWin2" class="btn minimize"></span>
+                    <span id="cameraWin3" class="btn maximize"></span>
+                </div>
+                <p>Camera</p>
+            </div>
+        
+            <div class="content camera-only">
+                <button id="captureBtn">📸 Take Photo</button>
+                <canvas id="cameraCanvas" style="display:none;"></canvas>
+                <video id="cameraVideo" autoplay playsinline ></video>
             </div>
         </div>
 
@@ -79,13 +130,19 @@
                 <img src="/imgs/photos-2025-11-14.webp" alt="">
             </div>
              <div class="dock-icon">
-                <a href="https://www.linkedin.com/in/chetan-kumawat-2a469b336/"><img src="/imgs/Limav-Flat-Gradient-Social-Linkedin.512.png" alt=""></a>
+                <a href="https://www.linkedin.com/company/github/"><img src="/imgs/Limav-Flat-Gradient-Social-Linkedin.512.png" alt=""></a>
             </div>
             <div class="dock-icon">
                 <a href="https://github.com/chetankumawat13"> <img src="/imgs/github-desktop-2021-05-20.webp" alt=""></a>
             </div>
             <div class="dock-icon">
-               <a href="https://www.instagram.com/koder.c13/"> <img src="/imgs/instagram-2022-05-19.webp" alt=""></a>
+               <a href="https://www.instagram.com/github/"> <img src="/imgs/instagram-2022-05-19.webp" alt=""></a>
+            </div>
+            <div class="dock-icon terminal">
+                <img src="/imgs/terminal.webp" alt="">
+            </div>
+            <div class="dock-icon camera">
+                <img src="/imgs/camera.webp" alt="">
             </div>
         </div>
         <div class="topbar">
@@ -96,9 +153,9 @@
                 <div class="name">
                     <h4>Chetan's Portfolio</h4>
                 </div>
-                <a href="">Linkedin</a>
-                <a href="">Github</a>
-                <a href="">Instagram</a>
+                <a href="https://www.linkedin.com/company/github/">Linkedin</a>
+                <a href="https://github.com/chetankumawat13">Github</a>
+                <a href="https://www.instagram.com/github/">Instagram</a>
             </div>
             <div class="right">
                 <i class="ri-wifi-fill"></i>
@@ -136,6 +193,16 @@
             <li id="deleteFolder">Delete</li>
         </ul>
    </main>
+   <div class="overlay">
+    <div class="loader">
+        <div class="logo-1">
+            <i class="ri-apple-fill"></i>
+        </div>
+        <div class="outer">
+            <div class="inner"></div>
+        </div>
+    </div>
+</div>
      
 
 
@@ -143,6 +210,7 @@
     <script src="app.js"></script>
 </body>
 </html>
+
 
 
 
