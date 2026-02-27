@@ -15,14 +15,27 @@
         <!-- desktop -->
         <div id="desktop">
         </div>
-        <div class="window" id="finderWin" data-tittle = "Finder">
+        <div class="window" id="finderWin" data-title="Finder">
             <div class="tittle-bar">
                 <div class="buttons">
-                    <span id="finderWin1" class="btn close"></span>
-                    <span id="finderWin2" class="btn minimize" ></span>
-                    <span id="finderWin3" class="btn maximize"></span>
+                    <span class="btn close" id="finderWin1"></span>
+                    <span class="btn minimize" id="finderWin2"></span>
+                    <span class="btn maximize" id="finderWin3"></span>
                 </div>
                 <p>Finder</p>
+            </div>
+        
+            <div class="finder-app">
+                <div class="finder-sidebar">
+                    <p class="side-item active" data-folder="desktop">Desktop</p>
+                    <p class="side-item" data-folder="documents">Documents</p>
+                    <p class="side-item" data-folder="downloads">Downloads</p>
+                    <p class="side-item" data-folder="photos">Photos</p>
+                </div>
+        
+                <div class="finder-content">
+                    <div class="finder-grid" id="finderGrid"></div>
+                </div>
             </div>
         </div>
         <div class="window" id="notesWin" data-title="Notes">
@@ -41,17 +54,20 @@
         <div class="window" id="browserWin" data-title="Browser">
             <div class="tittle-bar">
                 <div class="buttons">
-                    <span id="browserWin1" class="btn close" ></span>
-                    <span id="browserWin2" class="btn minimize" ></span>
-                    <span id="browserWin3" class="btn maximize" ></span>
+                    <span id="browserWin1" class="btn close"></span>
+                    <span id="browserWin2" class="btn minimize"></span>
+                    <span id="browserWin3" class="btn maximize"></span>
                 </div>
                 <p>Browser</p>
             </div>
-            <div class="content">
-                <iframe 
-    src="https://www.google.com/search?q=test"
-    style="width:100%; height:100%; border:none;">
-</iframe>
+        
+            <div class="content browser-app">
+                <div class="browser-bar">
+                    <input type="text" id="browserInput" placeholder="Enter URL (example.com)">
+                    <button id="goBtn">Go</button>
+                </div>
+        
+                <iframe id="browserFrame" src="https://example.com"></iframe>
             </div>
         </div>
         <div class="window" id="photosWin" data-title="Photos">

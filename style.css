@@ -163,6 +163,80 @@ main #cameraWin .camera-only #captureBtn {
   font-weight: 600;
   cursor: pointer;
 }
+main .finder-app {
+  display: flex;
+  height: calc(100% - 35px);
+}
+main .finder-app .finder-sidebar {
+  width: 160px;
+  background: #f3f3f3;
+  padding: 15px;
+}
+main .finder-app .finder-sidebar .side-item {
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: 0.2s ease;
+}
+main .finder-app .finder-sidebar .side-item:hover {
+  color: #000;
+  transform: translateX(3px);
+}
+main .finder-app .finder-sidebar .side-item.active {
+  font-weight: 600;
+  color: #000;
+}
+main .finder-app .finder-content {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+}
+main .finder-app .finder-content .finder-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+main .finder-app .finder-content .finder-grid .finder-file {
+  width: 80px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+main .finder-app .finder-content .finder-grid .finder-file:hover {
+  transform: scale(1.05);
+}
+main .finder-app .finder-content .finder-grid .finder-file img {
+  width: 50px;
+  pointer-events: none;
+}
+main .finder-app .finder-content .finder-grid .finder-file p {
+  font-size: 0.75rem;
+  margin-top: 5px;
+  pointer-events: none;
+}
+main #browserWin .browser-app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+main #browserWin .browser-bar {
+  padding: 8px;
+  background: #f1f1f1;
+  display: flex;
+  gap: 8px;
+}
+main #browserWin .browser-bar input {
+  flex: 1;
+  padding: 6px;
+}
+main #browserWin .browser-bar button {
+  padding: 6px 12px;
+  cursor: pointer;
+}
+main #browserWin #browserFrame {
+  flex: 1;
+  border: none;
+}
 main #photosWin .photos-app {
   position: relative;
   overflow-y: auto;

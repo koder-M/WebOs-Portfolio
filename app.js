@@ -650,7 +650,15 @@ const galleryView = document.querySelector(".gallery-view");
 let currentIndex = 0;
 
 function renderPhotos() {
-    let photos = JSON.parse(localStorage.getItem("myPhotos")) || [];
+    let photos = JSON.parse(localStorage.getItem("myPhotos"));
+
+    if (!photos || photos.length === 0) {
+        photos = [
+            "imgs/wal1.jpg",
+            "imgs/wal2.jpg"
+        ];
+        localStorage.setItem("myPhotos", JSON.stringify(photos));
+    }
 
     photoGrid.innerHTML = "";
 
@@ -678,7 +686,7 @@ backBtn.onclick = () => {
 
 photos.addEventListener("click", function(){
     openWindow("photosWin");
-    renderPhotos();   // IMPORTANT
+    renderPhotos();  
 });
 
 
@@ -707,5 +715,169 @@ setTimeout(() => {
         overlay.style.display = 'none';
     }, 500);
 }, 4000);
+
+
+const finderData = {
+    desktop: [
+        { name: "Portfolio.html", type: "file", content: "This is my Portfolio Website project." },
+        { name: "Project.js", type: "file", content: "console.log('Hello World');" }
+    ],
+    documents: [
+        { name: "Resume.pdf", type: "file", content: "Chetan Kumawat - Frontend Developer Resume" }
+    ],
+    downloads: [
+        { name: "Design.png", type: "app", src: "imgs/default1.jpg" }
+    ],
+    photos: [
+        { name: "Gallery", type: "image", app: "photosWin" }
+    ]
+};
+
+
+
+function createAppWindow(title, bodyContent) {
+
+    let winId = "dynamicWin_" + Date.now();
+
+    let win = document.createElement("div");
+    win.classList.add("window");
+    win.id = winId;
+
+    win.innerHTML = `
+        <div class="tittle-bar">
+            <div class="buttons">
+                <span class="btn close"></span>
+                <span class="btn minimize"></span>
+                <span class="btn maximize"></span>
+            </div>
+            <p>${title}</p>
+        </div>
+
+        <div class="content">
+            ${bodyContent}
+        </div>
+    `;
+
+    document.querySelector("#desktop").appendChild(win);
+
+    win.style.display = "block";
+    bringFront(winId);
+
+    // Close
+    win.querySelector(".close").addEventListener("click", () => {
+        win.remove();
+    });
+
+    // Minimize
+    win.querySelector(".minimize").addEventListener("click", () => {
+        minWindow(winId);
+    });
+
+    // Maximize
+    win.querySelector(".maximize").addEventListener("click", () => {
+        maxWindow(winId);
+    });
+
+    // Drag
+    let bar = win.querySelector(".tittle-bar");
+    let dragging = false, offsetX, offsetY;
+
+    bar.addEventListener("mousedown", (e) => {
+        dragging = true;
+        offsetX = e.clientX - win.offsetLeft;
+        offsetY = e.clientY - win.offsetTop;
+        bringFront(winId);
+    });
+
+    document.addEventListener("mousemove", (e) => {
+        if (!dragging) return;
+        win.style.left = e.clientX - offsetX + "px";
+        win.style.top = e.clientY - offsetY + "px";
+    });
+
+    document.addEventListener("mouseup", () => {
+        dragging = false;
+    });
+}
+
+const finderGrid = document.getElementById("finderGrid");
+const sideItems = document.querySelectorAll(".side-item");
+
+function renderFinder(folder) {
+    finderGrid.innerHTML = "";
+
+    finderData[folder].forEach(item => {
+
+        const div = document.createElement("div");
+        div.className = "finder-file";
+
+        div.innerHTML = `
+            <img src="imgs/${item.type === "image" ? "photos-2025-11-14.webp" : "folder.png"}">
+            <p>${item.name}</p>
+        `;
+
+        div.addEventListener("click", () => {
+
+            // 🔥 Photos App
+            if (item.type === "image") {
+                openWindow(item.app);
+                if (item.app === "photosWin") renderPhotos();
+            }
+
+            // 🔥 Image File
+            else if (item.type === "app") {
+                createAppWindow(item.name, `<img src="/imgs/wal1.jpg" style="width:50%;">`);
+            }
+
+            // 🔥 Normal File
+            else if (item.type === "file") {
+                createAppWindow(item.name, `<p>${item.content}</p>`);
+            }
+
+        });
+
+        finderGrid.appendChild(div);
+    });
+}
+
+sideItems.forEach(item => {
+    item.addEventListener("click", function(){
+        sideItems.forEach(i => i.classList.remove("active"));
+        this.classList.add("active");
+        renderFinder(this.dataset.folder);
+    });
+});
+
+renderFinder("desktop");
+
+let browserInput = document.getElementById("browserInput");
+let browserFrame = document.getElementById("browserFrame");
+let goBtn = document.getElementById("goBtn");
+
+goBtn.addEventListener("click", () => {
+    let value = browserInput.value.trim();
+
+
+    if (!value.includes(".") && !value.startsWith("http")) {
+        browserFrame.src = "https://www.bing.com/search?q=" + encodeURIComponent(value);
+        return;
+    }
+    if (!value.startsWith("http")) {
+        value = "https://" + value;
+    }
+    browserFrame.src = value;
+
+    setTimeout(() => {
+        try {
+            if (!browserFrame.contentWindow.location.href) {
+                window.open(value, "_blank");
+            }
+        } catch (e) {
+            window.open(value, "_blank");
+        }
+    }, 2000);
+});
+
+
 
 
