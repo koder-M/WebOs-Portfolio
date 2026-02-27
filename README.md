@@ -201,5 +201,10 @@ If you like this project:
 
 ---
 
+## 🔗 Social Links
+
+LinkedIn and Instagram links in the UI are currently dummy placeholders 
+added for design demonstration purposes only.
+
 ### 🔥 This is not just a website.  
 ### It’s a browser-based operating system built from scratch.
