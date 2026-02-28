@@ -66,7 +66,6 @@ help
 clear
 open finder
 open notes
-open browser
 open photos
 
 
@@ -161,7 +160,6 @@ git clone https://github.com/koder-M/WebOs-Portfolio.git
 - Advanced DOM manipulation
 - System-style UI architecture
 - Real-time state persistence
-- Browser Media API integration
 - Canvas image processing
 - Complex event handling
 - UI/UX engineering without frameworks

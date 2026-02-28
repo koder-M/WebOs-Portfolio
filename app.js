@@ -80,9 +80,9 @@ let photos = document.querySelector('.photos')
 finder.addEventListener("click", function(){
     openWindow("finderWin");
 })
-brwsr.addEventListener("click", function(){
-    openWindow("browserWin");
-})
+// brwsr.addEventListener("click", function(){
+//     openWindow("browserWin");
+// })
 nots.addEventListener("click", function(){
     openWindow("notesWin");
 })
@@ -108,10 +108,10 @@ notesbtn.addEventListener("click", function(){
     closeWindow("notesWin");
 })
 
-let browserbtn = document.querySelector("#browserWin1");
-browserbtn.addEventListener("click", function(){
-    closeWindow("browserWin");
-})
+// let browserbtn = document.querySelector("#browserWin1");
+// browserbtn.addEventListener("click", function(){
+//     closeWindow("browserWin");
+// })
 
 let photosbtn = document.querySelector('#photosWin1');
 photosbtn.addEventListener('click', () => {
@@ -129,10 +129,10 @@ notesmini.addEventListener("click", function(){
     minWindow("notesWin");
 })
 
-let brwsmini = document.querySelector("#browserWin2");
-brwsmini.addEventListener("click", function(){
-    minWindow("browserWin");
-})
+// let brwsmini = document.querySelector("#browserWin2");
+// brwsmini.addEventListener("click", function(){
+//     minWindow("browserWin");
+// })
 
 let photosmini = document.querySelector('#photosWin2');
 photosmini.addEventListener('click', () => {
@@ -174,10 +174,10 @@ notesMax.addEventListener("click", function() {
     maxWindow("notesWin");
 })
 
-let browserMax = document.querySelector("#browserWin3");
-browserMax.addEventListener("click", function() {
-    maxWindow("browserWin");
-})
+// let browserMax = document.querySelector("#browserWin3");
+// browserMax.addEventListener("click", function() {
+//     maxWindow("browserWin");
+// })
 
 let photosMax = document.querySelector('#photosWin3');
 photosMax.addEventListener('click', () => {
@@ -482,7 +482,7 @@ let commands = {
     about: "Hi, I'm Chetan Kumawat. I build interactive MacOS-style web experiences.",
     name: "Chetan Kumawat",
     skills: "HTML, CSS, JavaScript, UI Engineering",
-    help: "Commands: about, name, skills, open finder, open notes, open browser, open photos, clear"
+    help: "Commands: about, name, skills, open finder, open notes, open photos, clear"
 };
 
 function createNewInputLine(){
@@ -531,7 +531,7 @@ function attachTerminalEvent(inputElement){
 
                 if(app === "finder") openWindow("finderWin");
                 else if(app === "notes") openWindow("notesWin");
-                else if(app === "browser") openWindow("browserWin");
+                // else if(app === "browser") openWindow("browserWin");
                 else if(app === "photos") openWindow("photosWin");
                 else {
                     let err = document.createElement("div");
@@ -850,33 +850,33 @@ sideItems.forEach(item => {
 
 renderFinder("desktop");
 
-let browserInput = document.getElementById("browserInput");
-let browserFrame = document.getElementById("browserFrame");
-let goBtn = document.getElementById("goBtn");
+// let browserInput = document.getElementById("browserInput");
+// let browserFrame = document.getElementById("browserFrame");
+// let goBtn = document.getElementById("goBtn");
 
-goBtn.addEventListener("click", () => {
-    let value = browserInput.value.trim();
+// goBtn.addEventListener("click", () => {
+//     let value = browserInput.value.trim();
 
 
-    if (!value.includes(".") && !value.startsWith("http")) {
-        browserFrame.src = "https://www.bing.com/search?q=" + encodeURIComponent(value);
-        return;
-    }
-    if (!value.startsWith("http")) {
-        value = "https://" + value;
-    }
-    browserFrame.src = value;
+//     if (!value.includes(".") && !value.startsWith("http")) {
+//         browserFrame.src = "https://www.bing.com/search?q=" + encodeURIComponent(value);
+//         return;
+//     }
+//     if (!value.startsWith("http")) {
+//         value = "https://" + value;
+//     }
+//     browserFrame.src = value;
 
-    setTimeout(() => {
-        try {
-            if (!browserFrame.contentWindow.location.href) {
-                window.open(value, "_blank");
-            }
-        } catch (e) {
-            window.open(value, "_blank");
-        }
-    }, 2000);
-});
+//     setTimeout(() => {
+//         try {
+//             if (!browserFrame.contentWindow.location.href) {
+//                 window.open(value, "_blank");
+//             }
+//         } catch (e) {
+//             window.open(value, "_blank");
+//         }
+//     }, 2000);
+// });
 
 
 

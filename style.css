@@ -372,10 +372,10 @@ main .dock .dock-icon img {
   transition: transform 0.16s ease;
   cursor: pointer;
 }
-main .dock .dock-icon:nth-child(5) img {
+main .dock .dock-icon:nth-child(4) img {
   width: 42.7px;
 }
-main .dock .dock-icon:nth-child(7) img {
+main .dock .dock-icon:nth-child(6) img {
   width: 37.7px;
   border-radius: 5px;
 }
